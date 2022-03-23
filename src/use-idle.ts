@@ -36,7 +36,7 @@ export function useIdle(timeout: number, options?: Partial<{ inputs: Enum.UserIn
 
 	useEffect(() => {
 		const events = UserInputService.InputBegan.Connect((input) => {
-			if (inputs.includes(input.UserInputType)) {
+			if (inputs.includes(input.UserInputType as never)) {
 				handleInput();
 			}
 		});
