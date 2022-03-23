@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/roact-hooked-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Useful hooks for @rbxts/roact-hooked",
   "repository": {
     "type": "git",
@@ -12,7 +12,11 @@
     "watch": "rbxtsc -w",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["roact", "roblox-ts", "hooks"],
+  "keywords": [
+    "roact",
+    "roblox-ts",
+    "hooks"
+  ],
   "author": "littensy",
   "license": "ISC",
   "types": "out/index.d.ts",
