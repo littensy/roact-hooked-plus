@@ -8,6 +8,7 @@ export { useClickOutside } from "./use-click-outside";
 export { useDebouncedValue } from "./use-debounced-value";
 export { useDelayedValue } from "./use-delayed-value";
 export { useDidMount } from "./use-did-mount";
+export { useEvent } from "./use-event";
 export { useForceUpdate } from "./use-force-update";
 export { useGroupMotor } from "./use-group-motor";
 export { useHotkeys } from "./use-hotkeys";
