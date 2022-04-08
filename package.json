@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/roact-hooked-plus",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Useful hooks for @rbxts/roact-hooked",
   "repository": {
     "type": "git",
