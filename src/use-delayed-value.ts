@@ -18,7 +18,7 @@ export function clearUpdates(updates: Map<number, IncomingUpdate>, laterThan?: n
 
 let nextId = 0;
 
-export function useDelayedValue<T>(value: T, delay: number): T {
+export function useDelayedValue<T>(value: T, delayMs: number): T {
 	const [delayedValue, setDelayedValue] = useState(value);
 	const updates = useMemo(() => new Map<number, IncomingUpdate>(), []);
 
@@ -28,8 +28,8 @@ export function useDelayedValue<T>(value: T, delay: number): T {
 			timeout: setTimeout(() => {
 				setDelayedValue(value);
 				updates.delete(id);
-			}, delay),
-			resolveTime: os.clock() + delay,
+			}, delayMs),
+			resolveTime: os.clock() + delayMs,
 		};
 
 		// Clear all updates that are later than the current one to prevent overlap

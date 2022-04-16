@@ -10,7 +10,7 @@ interface Sequence<T> {
 
 type Updates<T> = Array<[milliseconds: number, callback: () => T]>;
 
-export function useSequenceUpdate<T>(sequence: Sequence<T>, onUpdate: (value: T) => void, deps: unknown[] = []) {
+export function useSequenceCallback<T>(sequence: Sequence<T>, onUpdate: (value: T) => void, deps: unknown[] = []) {
 	const updates = useMemo(() => (typeIs(sequence.updates, "function") ? sequence.updates() : sequence.updates), deps);
 
 	const callback = useMutable(onUpdate);

@@ -5,24 +5,25 @@ import { clearUpdates, IncomingUpdate } from "./use-delayed-value";
 
 let nextId = 0;
 
-export function useDelayedUpdate<T>(value: T, delay: number, callback: (value: T) => void) {
+export function useDelayedEffect(effect: () => void, delayMs: number, deps: unknown[]) {
 	const updates = useMemo(() => new Map<number, IncomingUpdate>(), []);
 
 	useEffect(() => {
 		const id = nextId++;
 		const update: IncomingUpdate = {
 			timeout: setTimeout(() => {
-				callback(value);
+				effect();
 				updates.delete(id);
-			}, delay),
-			resolveTime: os.clock() + delay,
+			}, delayMs),
+
+			resolveTime: os.clock() + delayMs,
 		};
 
 		// Clear all updates that are later than the current one to prevent overlap
 		clearUpdates(updates, update.resolveTime);
 
 		updates.set(id, update);
-	}, [value]);
+	}, deps);
 
 	useEffect(() => {
 		return () => clearUpdates(updates);

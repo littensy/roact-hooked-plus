@@ -7,7 +7,7 @@ export { SpringOptions, getBinding, useGoal, useInstant, useLinear, useMotor, us
 export { useAnimation } from "./use-animation";
 export { useClickOutside } from "./use-click-outside";
 export { useDebouncedValue } from "./use-debounced-value";
-export { useDelayedUpdate } from "./use-delayed-update";
+export { useDelayedEffect } from "./use-delayed-effect";
 export { useDelayedValue } from "./use-delayed-value";
 export { useDidMount } from "./use-did-mount";
 export { useEvent } from "./use-event";
@@ -19,7 +19,7 @@ export { useInterval } from "./use-interval";
 export { useListState } from "./use-list-state";
 export { useMouse } from "./use-mouse";
 export { usePromise } from "./use-promise";
-export { useSequenceUpdate } from "./use-sequence-update";
+export { useSequenceCallback } from "./use-sequence-callback";
 export { useSequence } from "./use-sequence";
 export { useSetState } from "./use-set-state";
 export { useSingleMotor } from "./use-single-motor";
