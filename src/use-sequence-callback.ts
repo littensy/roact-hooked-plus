@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useMutable } from "@rbxts/roact-hooked";
 
 import { useDidMount } from "./use-did-mount";
+import { resolve } from "./utils/resolve";
 import { clearTimeout, setTimeout, Timeout } from "./utils/set-timeout";
 
 interface Sequence<T> {
@@ -11,7 +12,7 @@ interface Sequence<T> {
 type Updates<T> = Array<[milliseconds: number, callback: () => T]>;
 
 export function useSequenceCallback<T>(sequence: Sequence<T>, onUpdate: (value: T) => void, deps: unknown[] = []) {
-	const updates = useMemo(() => (typeIs(sequence.updates, "function") ? sequence.updates() : sequence.updates), deps);
+	const updates = useMemo(() => resolve(sequence.updates), deps);
 
 	const callback = useMutable(onUpdate);
 	callback.current = onUpdate;

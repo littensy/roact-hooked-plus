@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "@rbxts/roact-hooked";
 
 import { useDidMount } from "./use-did-mount";
+import { resolve } from "./utils/resolve";
 import { clearTimeout, setTimeout, Timeout } from "./utils/set-timeout";
 
 interface Sequence<T> {
@@ -13,7 +14,7 @@ type Updates<T> = Array<[milliseconds: number, callback: () => T]>;
 
 export function useSequence<T>(sequence: Sequence<T>, deps: unknown[] = []): T {
 	const [state, setState] = useState(sequence.initialState);
-	const updates = useMemo(() => (typeIs(sequence.updates, "function") ? sequence.updates() : sequence.updates), deps);
+	const updates = useMemo(() => resolve(sequence.updates), deps);
 	const didMount = useDidMount();
 
 	useEffect(() => {

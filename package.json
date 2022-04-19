@@ -42,7 +42,7 @@
   },
   "peerDependencies": {
     "@rbxts/roact": "^1.4.0-ts.2",
-    "@rbxts/roact-hooked": "^1.2.4"
+    "@rbxts/roact-hooked": "^1.2.7"
   },
   "dependencies": {
     "@rbxts/flipper": "^2.0.1",

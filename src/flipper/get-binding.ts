@@ -17,5 +17,5 @@ export function getBinding<T>(
 	motor.onStep(setBindingValue);
 
 	motor[AssignedBinding as never] = binding as never;
-	return binding as T extends undefined ? Roact.Binding<number> : Roact.Binding<T>;
+	return binding as never;
 }
