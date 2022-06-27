@@ -1,6 +1,5 @@
-import { Linear } from "@rbxts/flipper";
 import Roact from "@rbxts/roact";
-
+import { Linear } from "@rbxts/flipper";
 import { useGoal } from "./use-goal";
 
 export function useLinear(

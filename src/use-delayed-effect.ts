@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from "@rbxts/roact-hooked";
-
 import { setTimeout } from "./utils/set-timeout";
 import { clearUpdates, IncomingUpdate } from "./use-delayed-value";
 

@@ -41,8 +41,8 @@
     "typescript": "^4.6.2"
   },
   "peerDependencies": {
-    "@rbxts/roact": "^1.4.0-ts.2",
-    "@rbxts/roact-hooked": "^1.2.7"
+    "@rbxts/roact": "*",
+    "@rbxts/roact-hooked": "^2.0.0"
   },
   "dependencies": {
     "@rbxts/flipper": "^2.0.1",

@@ -1,5 +1,4 @@
 import { useMutable, useState } from "@rbxts/roact-hooked";
-
 import { clearInterval, Interval, setInterval } from "./utils/set-interval";
 
 /**

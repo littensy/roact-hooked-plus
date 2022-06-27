@@ -1,6 +1,5 @@
-import { Spring } from "@rbxts/flipper";
 import Roact from "@rbxts/roact";
-
+import { Spring } from "@rbxts/flipper";
 import { useGoal } from "./use-goal";
 
 export type SpringOptions = ConstructorParameters<typeof Spring>[1];

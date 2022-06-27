@@ -1,6 +1,5 @@
 import { Instant, Linear, Spring } from "@rbxts/flipper";
 import Roact from "@rbxts/roact";
-
 import { getBinding } from "./get-binding";
 import { useMotor } from "./use-motor";
 

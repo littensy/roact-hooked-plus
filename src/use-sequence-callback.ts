@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useMutable } from "@rbxts/roact-hooked";
-
 import { useDidMount } from "./use-did-mount";
 import { resolve } from "./utils/resolve";
 import { clearTimeout, setTimeout, Timeout } from "./utils/set-timeout";

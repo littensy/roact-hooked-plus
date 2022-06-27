@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMutable, useState } from "@rbxts/roact-hooked";
 import { UserInputService } from "@rbxts/services";
-
 import { clearTimeout, setTimeout, Timeout } from "./utils/set-timeout";
 
 const DEFAULT_INPUTS = [

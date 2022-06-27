@@ -4,6 +4,8 @@ export { Timeout, clearTimeout, setTimeout } from "./utils/set-timeout";
 export { Interval, clearInterval, setInterval } from "./utils/set-interval";
 
 export { SpringOptions, getBinding, useGoal, useInstant, useLinear, useMotor, useSpring } from "./flipper";
+export * from "@rbxts/flipper";
+
 export { useAnimation } from "./use-animation";
 export { useClickOutside } from "./use-click-outside";
 export { useDebouncedValue } from "./use-debounced-value";

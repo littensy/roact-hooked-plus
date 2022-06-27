@@ -1,6 +1,5 @@
 import { Instant, Linear, Spring } from "@rbxts/flipper";
 import { Binding } from "@rbxts/roact";
-
 import { getBinding, useMotor } from "./flipper";
 
 type GoalCtor = typeof Spring | typeof Linear;
