@@ -22,7 +22,7 @@ export function useToggle<T>(initialValue: T, options: [T, T]) {
 		}
 	};
 
-	return [state, toggle] as const;
+	return $tuple(state, toggle);
 }
 
 /**

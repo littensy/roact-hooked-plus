@@ -11,5 +11,5 @@ export function useSetState<T extends Record<string, unknown>>(initialState: T) 
 			...current,
 			...resolve(statePartial, current),
 		}));
-	return [state, setState] as const;
+	return $tuple(state, setState);
 }

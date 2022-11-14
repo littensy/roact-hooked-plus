@@ -3,9 +3,7 @@ export { asBinding, getBindingValue, isBinding, mapBinding } from "./utils/bindi
 export { Timeout, clearTimeout, setTimeout } from "./utils/set-timeout";
 export { Interval, clearInterval, setInterval } from "./utils/set-interval";
 
-export { SpringOptions, getBinding, useGoal, useInstant, useLinear, useMotor, useSpring } from "./flipper";
-export * from "@rbxts/flipper";
-
+export * from "./flipper";
 export { useAnimation } from "./use-animation";
 export { useClickOutside } from "./use-click-outside";
 export { useDebouncedValue } from "./use-debounced-value";
@@ -18,7 +16,6 @@ export { useGroupMotor } from "./use-group-motor";
 export { useHotkeys } from "./use-hotkeys";
 export { useIdle } from "./use-idle";
 export { useInterval } from "./use-interval";
-export { useListState } from "./use-list-state";
 export { useMouse } from "./use-mouse";
 export { usePromise } from "./use-promise";
 export { useSequenceCallback } from "./use-sequence-callback";

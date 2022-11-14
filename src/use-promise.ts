@@ -62,7 +62,7 @@ function reducer<T>(state: State<T>, action: Action): State<T> {
 export function usePromise<T>(
 	promise: Promise<T> | (() => Promise<T>),
 	deps: unknown[] = [],
-): [result: T | undefined, err: unknown | undefined, state: PromiseState] {
+): LuaTuple<[result: T | undefined, err: unknown | undefined, state: PromiseState]> {
 	const [{ err, result, state }, dispatch] = useReducer(reducer as Reducer<State<T>, Action>, defaultState);
 
 	useEffect(() => {
@@ -96,5 +96,5 @@ export function usePromise<T>(
 		};
 	}, deps);
 
-	return [result, err, state];
+	return $tuple(result, err, state);
 }

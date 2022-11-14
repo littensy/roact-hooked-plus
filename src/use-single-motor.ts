@@ -13,5 +13,5 @@ export function useSingleMotor(initialValue: number) {
 		motor.setGoal(goal);
 	};
 
-	return [binding, setGoal, motor] as const;
+	return $tuple(binding, setGoal, motor);
 }
