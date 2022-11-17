@@ -6,6 +6,7 @@ export { Interval, clearInterval, setInterval } from "./utils/set-interval";
 export * from "./flipper";
 export * from "@rbxts/flipper";
 
+export { createStory } from "./create-story";
 export { useAnimation } from "./use-animation";
 export { useClickOutside } from "./use-click-outside";
 export { useDebouncedValue } from "./use-debounced-value";
