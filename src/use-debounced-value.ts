@@ -10,7 +10,11 @@ export function useDebouncedValue<T = unknown>(value: T, wait: number, options =
 	const timeoutRef = useMutable<Timeout>(undefined);
 	const cooldownRef = useMutable(false);
 
-	const cancel = () => clearTimeout(timeoutRef.current);
+	const cancel = () => {
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current);
+		}
+	};
 
 	useEffect(() => {
 		if (mountedRef.current) {
