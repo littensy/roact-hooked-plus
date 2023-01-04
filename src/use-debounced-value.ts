@@ -1,5 +1,5 @@
 import { useEffect, useMutable, useState } from "@rbxts/roact-hooked";
-import { clearTimeout, setTimeout, Timeout } from "./utils/set-timeout";
+import { Timeout, clearTimeout, setTimeout } from "./utils/set-timeout";
 
 /**
  * @see https://mantine.dev/hooks/use-debounced-value/

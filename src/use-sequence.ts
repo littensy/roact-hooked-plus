@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "@rbxts/roact-hooked";
 import { useDidMount } from "./use-did-mount";
 import { resolve } from "./utils/resolve";
-import { clearTimeout, setTimeout, Timeout } from "./utils/set-timeout";
+import { Timeout, clearTimeout, setTimeout } from "./utils/set-timeout";
 
 interface Sequence<T> {
 	initialState: T;

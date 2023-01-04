@@ -1,4 +1,4 @@
-import { GroupMotor, isMotor, SingleMotor } from "@rbxts/flipper";
+import { GroupMotor, SingleMotor, isMotor } from "@rbxts/flipper";
 import Roact from "@rbxts/roact";
 
 const AssignedBinding = setmetatable({}, { __tostring: () => "AssignedBinding" }) as symbol;

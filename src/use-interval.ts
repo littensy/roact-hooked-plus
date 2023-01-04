@@ -1,5 +1,5 @@
 import { useMutable, useState } from "@rbxts/roact-hooked";
-import { clearInterval, Interval, setInterval } from "./utils/set-interval";
+import { Interval, clearInterval, setInterval } from "./utils/set-interval";
 
 /**
  * @see https://mantine.dev/hooks/use-interval/
