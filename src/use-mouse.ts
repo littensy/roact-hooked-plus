@@ -6,7 +6,10 @@ export function useMouse(onChange?: (location: Vector2) => void) {
 
 	useEffect(() => {
 		const handle = UserInputService.InputChanged.Connect((input) => {
-			if (input.UserInputType === Enum.UserInputType.MouseMovement) {
+			if (
+				input.UserInputType === Enum.UserInputType.MouseMovement ||
+				input.UserInputType === Enum.UserInputType.Touch
+			) {
 				const location = UserInputService.GetMouseLocation();
 
 				setLocation(location);
