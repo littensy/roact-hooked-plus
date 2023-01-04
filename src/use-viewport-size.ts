@@ -6,7 +6,7 @@ import { Workspace } from "@rbxts/services";
  * @param onChange Fires when the viewport size changes
  */
 export function useViewportSize(onChange?: (size: Vector2) => void) {
-	const [size, setSize] = useBinding(Vector2.zero);
+	const [size, setSize] = useBinding(Workspace.CurrentCamera?.ViewportSize ?? Vector2.one);
 
 	useEffect(() => {
 		let viewportChanged: RBXScriptConnection | undefined;
