@@ -24,12 +24,15 @@ export function useViewportSize(onChange?: (size: Vector2) => void) {
 					setSize(camera.ViewportSize);
 					onChange?.(camera.ViewportSize);
 				});
+
+				setSize(camera.ViewportSize);
+				onChange?.(camera.ViewportSize);
 			}
 		};
 
 		const cameraChanged = Workspace.GetPropertyChangedSignal("CurrentCamera").Connect(updateConnection);
 
-		updateConnection();
+		task.spawn(updateConnection);
 
 		return () => {
 			cameraChanged.Disconnect();
