@@ -2,11 +2,12 @@ import { useEffect } from "@rbxts/roact-hooked";
 
 export function useEvent<T extends RBXScriptSignal>(
 	event: T,
-	callback: T extends RBXScriptSignal<infer U> ? U : never,
-	deps?: unknown[],
+	callback?: T extends RBXScriptSignal<infer U> ? U : never,
 ) {
 	useEffect(() => {
-		const handle = event.Connect(callback);
-		return () => handle.Disconnect();
-	}, deps);
+		if (callback) {
+			const handle = event.Connect(callback);
+			return () => handle.Disconnect();
+		}
+	}, [callback]);
 }
