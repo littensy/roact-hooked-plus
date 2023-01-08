@@ -1,8 +1,10 @@
 import Roact from "@rbxts/roact";
-import { withHooks } from "@rbxts/roact-hooked";
+import { withHookDetection, withHooks } from "@rbxts/roact-hooked";
 
 export function createStory(...args: Parameters<typeof withHooks>) {
 	return (frame: Frame) => {
+		withHookDetection(Roact);
+
 		const handle = Roact.mount(Roact.createElement(withHooks(...args)), frame);
 
 		return () => {
