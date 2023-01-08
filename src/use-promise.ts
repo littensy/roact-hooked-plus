@@ -1,100 +1,37 @@
-import { Reducer, useEffect, useReducer } from "@rbxts/roact-hooked";
+import { useEffect, useState } from "@rbxts/roact-hooked";
 
-// https://github.com/bsonntag/react-use-promise
-
-type PromiseState = "pending" | "rejected" | "resolved";
-
-interface State<T = any> {
+interface PromiseState<T> {
+	status: Promise.Status;
 	result?: T;
-	err?: unknown;
-	state: PromiseState;
+	errorMessage?: unknown;
 }
 
-interface Action {
-	type: PromiseState;
-	payload?: unknown;
-}
-
-function resolvePromise<T>(promise: Promise<T> | (() => Promise<T>)): Promise<T> {
-	if (typeIs(promise, "function")) {
-		return promise();
-	}
-
-	return promise;
-}
-
-const states: Record<PromiseState, PromiseState> = {
-	pending: "pending",
-	rejected: "rejected",
-	resolved: "resolved",
-};
-
-const defaultState: State = {
-	err: undefined,
-	result: undefined,
-	state: states.pending,
-};
-
-function reducer<T>(state: State<T>, action: Action): State<T> {
-	switch (action.type) {
-		case states.pending:
-			return defaultState as State<T>;
-
-		case states.resolved:
-			return {
-				err: undefined,
-				result: action.payload as T,
-				state: states.resolved,
-			};
-
-		case states.rejected:
-			return {
-				err: action.payload,
-				result: undefined,
-				state: states.rejected,
-			};
-
-		default:
-			return state;
-	}
-}
-
-export function usePromise<T>(
-	promise: Promise<T> | (() => Promise<T>),
-	deps: unknown[] = [],
-): LuaTuple<[result: T | undefined, err: unknown | undefined, state: PromiseState]> {
-	const [{ err, result, state }, dispatch] = useReducer(reducer as Reducer<State<T>, Action>, defaultState);
+export function usePromise<T>(promise: Promise<T> | (() => Promise<T>), dependencies: unknown[] = []) {
+	const [{ result, errorMessage, status }, setState] = useState<PromiseState<T>>({
+		status: Promise.Status.Started,
+	});
 
 	useEffect(() => {
-		promise = resolvePromise<T>(promise);
-
-		if (!promise) {
-			return;
+		if (status !== Promise.Status.Started) {
+			setState({ status: Promise.Status.Started });
 		}
 
-		let canceled = false;
+		let result: T | undefined;
+		let errorMessage: unknown;
 
-		dispatch({ type: states.pending });
-
-		promise.then(
-			(result) =>
-				!canceled &&
-				dispatch({
-					payload: result,
-					type: states.resolved,
-				}),
-			(err) =>
-				!canceled &&
-				dispatch({
-					payload: err,
-					type: states.rejected,
-				}),
-		);
+		const promiseToUse = (typeIs(promise, "function") ? promise() : promise)
+			.then(
+				(promiseResult) => (result = promiseResult),
+				(promiseErrorMessage: unknown) => (errorMessage = promiseErrorMessage),
+			)
+			.done((status) => {
+				setState({ status, result, errorMessage });
+			});
 
 		return () => {
-			canceled = true;
+			promiseToUse.cancel();
 		};
-	}, deps);
+	}, dependencies);
 
-	return $tuple(result, err, state);
+	return $tuple(result, errorMessage, status);
 }
