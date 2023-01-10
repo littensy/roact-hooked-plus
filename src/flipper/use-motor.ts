@@ -1,5 +1,5 @@
 import { GroupMotor, SingleMotor } from "@rbxts/flipper";
-import { useMemo } from "@rbxts/roact-hooked";
+import { useEffect, useMemo } from "@rbxts/roact-hooked";
 
 function createMotor(initialValue: number | number[] | Record<string, number>): SingleMotor | GroupMotor<unknown> {
 	if (typeIs(initialValue, "number")) {
@@ -14,5 +14,13 @@ function createMotor(initialValue: number | number[] | Record<string, number>): 
 export function useMotor<T extends number | number[] | Record<string, number>>(
 	initialValue: T,
 ): T extends number ? SingleMotor : GroupMotor<T> {
-	return useMemo(() => createMotor(initialValue), []) as never;
+	const motor = useMemo(() => createMotor(initialValue), []);
+
+	useEffect(() => {
+		return () => {
+			motor.stop();
+		};
+	}, []);
+
+	return motor as never;
 }

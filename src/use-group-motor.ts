@@ -13,6 +13,9 @@ export function useGroupMotor<T extends number[] | Readonly<Record<string, numbe
 
 	useEffect(() => {
 		motor.onStep(setBinding);
+		return () => {
+			motor.stop();
+		};
 	}, []);
 
 	const setGoal = (goal: GroupMotorGoals<T>) => {

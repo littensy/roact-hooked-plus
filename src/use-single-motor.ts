@@ -7,6 +7,9 @@ export function useSingleMotor(initialValue: number) {
 
 	useEffect(() => {
 		motor.onStep(setBinding);
+		return () => {
+			motor.stop();
+		};
 	}, []);
 
 	const setGoal = (goal: Spring | Linear | Instant) => {
