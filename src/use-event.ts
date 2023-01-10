@@ -1,7 +1,7 @@
 import { useEffect, useMutable } from "@rbxts/roact-hooked";
 
 export function useEvent<T extends unknown[]>(
-	event: { Connect: (callback: (...args: T) => void) => { Disconnect: () => void } },
+	event: { Connect(callback: (...args: T) => void): { Disconnect(): void } },
 	callback?: (...args: T) => void,
 ) {
 	const callbackRef = useMutable(callback);
