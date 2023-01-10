@@ -1,13 +1,26 @@
-import { useEffect } from "@rbxts/roact-hooked";
+import { useEffect, useMutable } from "@rbxts/roact-hooked";
 
-export function useEvent<T extends RBXScriptSignal>(
-	event: T,
-	callback?: T extends RBXScriptSignal<infer U> ? U : never,
-) {
+interface SignalLike<T extends Callback = Callback> {
+	Connect(callback: T): ConnectionLike;
+}
+
+interface ConnectionLike {
+	Disconnect(): void;
+}
+
+export function useEvent<T extends SignalLike>(event: T, callback?: T extends SignalLike<infer U> ? U : never) {
+	const callbackRef = useMutable(callback);
+	callbackRef.current = callback;
+
 	useEffect(() => {
-		if (callback) {
-			const handle = event.Connect(callback);
-			return () => handle.Disconnect();
+		if (!callback) {
+			return;
 		}
-	}, [callback]);
+
+		const connection = event.Connect((...args) => {
+			callbackRef.current?.(...args);
+		});
+
+		return () => connection.Disconnect();
+	}, [callback !== undefined]);
 }
