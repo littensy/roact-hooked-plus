@@ -1,5 +1,7 @@
 import { useEffect, useMutable } from "@rbxts/roact-hooked";
 
+type Callback = (...args: unknown[]) => void;
+
 interface SignalLike<T extends Callback = Callback> {
 	Connect(callback: T): ConnectionLike;
 }
