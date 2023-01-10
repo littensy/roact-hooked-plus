@@ -17,5 +17,5 @@ export function useEvent<T extends unknown[]>(
 		});
 
 		return () => connection.Disconnect();
-	}, [callback !== undefined]);
+	}, [event, callback !== undefined]);
 }
