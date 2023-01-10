@@ -1,16 +1,9 @@
 import { useEffect, useMutable } from "@rbxts/roact-hooked";
 
-type Callback = (...args: unknown[]) => void;
-
-interface SignalLike<T extends Callback = Callback> {
-	Connect(callback: T): ConnectionLike;
-}
-
-interface ConnectionLike {
-	Disconnect(): void;
-}
-
-export function useEvent<T extends SignalLike>(event: T, callback?: T extends SignalLike<infer U> ? U : never) {
+export function useEvent<T extends unknown[]>(
+	event: { Connect: (callback: (...args: T) => void) => { Disconnect: () => void } },
+	callback?: (...args: T) => void,
+) {
 	const callbackRef = useMutable(callback);
 	callbackRef.current = callback;
 
