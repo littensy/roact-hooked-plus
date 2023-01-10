@@ -1,4 +1,4 @@
-import { useBinding, useEffect } from "@rbxts/roact-hooked";
+import { useBinding, useEffect, useMutable } from "@rbxts/roact-hooked";
 import { Workspace } from "@rbxts/services";
 
 /**
@@ -7,6 +7,9 @@ import { Workspace } from "@rbxts/services";
  */
 export function useViewportSize(onChange?: (size: Vector2) => void) {
 	const [size, setSize] = useBinding(Workspace.CurrentCamera?.ViewportSize ?? Vector2.one);
+
+	const onChangeRef = useMutable(onChange);
+	onChangeRef.current = onChange;
 
 	useEffect(() => {
 		let viewportChanged: RBXScriptConnection | undefined;
@@ -22,11 +25,11 @@ export function useViewportSize(onChange?: (size: Vector2) => void) {
 			if (camera) {
 				viewportChanged = camera.GetPropertyChangedSignal("ViewportSize").Connect(() => {
 					setSize(camera.ViewportSize);
-					onChange?.(camera.ViewportSize);
+					onChangeRef.current?.(camera.ViewportSize);
 				});
 
 				setSize(camera.ViewportSize);
-				onChange?.(camera.ViewportSize);
+				onChangeRef.current?.(camera.ViewportSize);
 			}
 		};
 

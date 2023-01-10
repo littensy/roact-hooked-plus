@@ -1,8 +1,11 @@
-import { useBinding, useEffect } from "@rbxts/roact-hooked";
+import { useBinding, useEffect, useMutable } from "@rbxts/roact-hooked";
 import { UserInputService } from "@rbxts/services";
 
 export function useMouse(onChange?: (location: Vector2) => void) {
 	const [location, setLocation] = useBinding(UserInputService.GetMouseLocation());
+
+	const onChangeRef = useMutable(onChange);
+	onChangeRef.current = onChange;
 
 	useEffect(() => {
 		const handle = UserInputService.InputChanged.Connect((input) => {
@@ -13,7 +16,7 @@ export function useMouse(onChange?: (location: Vector2) => void) {
 				const location = UserInputService.GetMouseLocation();
 
 				setLocation(location);
-				onChange?.(location);
+				onChangeRef.current?.(location);
 			}
 		});
 
