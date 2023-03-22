@@ -1,5 +1,6 @@
 import { useBinding, useEffect, useMutable } from "@rbxts/roact-hooked";
 import { Workspace } from "@rbxts/services";
+import { useCamera } from "./use-camera";
 
 /**
  * Returns a binding to the current screen size.
@@ -7,41 +8,21 @@ import { Workspace } from "@rbxts/services";
  */
 export function useViewportSize(onChange?: (size: Vector2) => void) {
 	const [size, setSize] = useBinding(Workspace.CurrentCamera?.ViewportSize ?? Vector2.one);
+	const camera = useCamera();
 
 	const onChangeRef = useMutable(onChange);
 	onChangeRef.current = onChange;
 
 	useEffect(() => {
-		let viewportChanged: RBXScriptConnection | undefined;
-
-		const updateConnection = () => {
-			const camera = Workspace.CurrentCamera;
-
-			if (viewportChanged) {
-				viewportChanged.Disconnect();
-				viewportChanged = undefined;
-			}
-
-			if (camera) {
-				viewportChanged = camera.GetPropertyChangedSignal("ViewportSize").Connect(() => {
-					setSize(camera.ViewportSize);
-					onChangeRef.current?.(camera.ViewportSize);
-				});
-
-				setSize(camera.ViewportSize);
-				onChangeRef.current?.(camera.ViewportSize);
-			}
-		};
-
-		const cameraChanged = Workspace.GetPropertyChangedSignal("CurrentCamera").Connect(updateConnection);
-
-		task.spawn(updateConnection);
+		const connection = camera.GetPropertyChangedSignal("ViewportSize").Connect(() => {
+			setSize(camera.ViewportSize);
+			onChangeRef.current?.(camera.ViewportSize);
+		});
 
 		return () => {
-			cameraChanged.Disconnect();
-			viewportChanged?.Disconnect();
+			connection.Disconnect();
 		};
-	}, []);
+	}, [camera]);
 
 	return size;
 }
