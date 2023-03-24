@@ -2,6 +2,7 @@ export { arrayToMap } from "./utils/array-to-map";
 export { asBinding, getBindingValue, isBinding, mapBinding } from "./utils/binding-utils";
 export { Timeout, clearTimeout, setTimeout } from "./utils/set-timeout";
 export { Interval, clearInterval, setInterval } from "./utils/set-interval";
+export * from "./utils/motor";
 
 export * from "./flipper";
 export * from "@rbxts/flipper";
@@ -28,7 +29,7 @@ export { useSingleMotor } from "./use-single-motor";
 export { useToggle } from "./use-toggle";
 export { useViewportSize } from "./use-viewport-size";
 export { useBindToRenderStep } from "./use-bind-to-render-step";
-export { useBindingEvent } from "./use-binding-event";
+export { useBindingEvent, useBindingState } from "./use-binding-event";
 export { useCamera } from "./use-camera";
 export { useCurrent } from "./use-current";
 export { usePrevious } from "./use-previous";
