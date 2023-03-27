@@ -15,7 +15,9 @@ export function useBindToRenderStep(priority: number, callback: (deltaTime: numb
 	useEffect(() => {
 		const key = HttpService.GenerateGUID(false);
 
-		RunService.BindToRenderStep(key, priority, callbackRef.current);
+		RunService.BindToRenderStep(key, priority, (deltaTime) => {
+			callbackRef.current(deltaTime);
+		});
 
 		return () => {
 			RunService.UnbindFromRenderStep(key);
